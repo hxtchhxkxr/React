@@ -4,6 +4,7 @@ import Button from "../component/Button";
 import Header from "../component/Header";
 import { getMonthRangeByDate } from "../util";
 import DiaryList from "../component/DiaryList";
+import axiosInstance from "../api/axiosInstance";
 
 const Home = () => {
   const data = useContext(DiaryStateContext);
@@ -32,6 +33,13 @@ const Home = () => {
       setFilteredData([]);
     }
   }, [data, pivotDate]);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/api/diaries", { params: { from: 0, to: 9999999999999 } })
+      .then((res) => console.log("서버 응답:", res.data))
+      .catch((err) => console.error("에러:", err));
+  }, []);
 
   return (
     <div>

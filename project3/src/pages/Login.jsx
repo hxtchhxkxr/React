@@ -2,9 +2,10 @@ import "./Login.css";
 import { useState } from "react";
 import Header from "../component/Header";
 import Button from "../component/Button";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { setTokens } from "../api/token";
+import { login } from "../api/authApi";
+import { getErrorMessage } from "../api/error";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,22 +19,11 @@ const Login = () => {
     }
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        {
-          email,
-          password,
-        },
-      );
-
+      const data = await login(email, password);
       setTokens(data.accessToken, data.refreshToken);
       navigate("/", { replace: true });
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response) {
-        alert(error.response.data.message);
-      } else {
-        alert("서버에 연결할 수 없습니다");
-      }
+      alert(getErrorMessage(error));
     }
   };
 
