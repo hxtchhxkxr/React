@@ -1,23 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { DiaryStateContext } from "../App";
-import { useNavigate } from "react-router-dom";
-
-const useDiary = (id) => {
-  const data = useContext(DiaryStateContext);
-  const [diary, setDiary] = useState();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const matchDiary = data.find((it) => String(it.id) === String(id));
-    if (matchDiary) {
-      setDiary(matchDiary);
-    } else {
-      alert("일기가 존재하지 않습니다");
-      navigate("/", { replace: true });
-    }
-  }, [id]);
-
-  return diary;
+// TODO (Part B-1): API로 일기 한 건을 가져오도록 구현
+const useDiary = () => {
+  return undefined;
 };
 
 export default useDiary;

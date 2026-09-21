@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import useDiary from "../hooks/useDiary";
 import Button from "../component/Button";
 import Header from "../component/Header";
-import { useContext } from "react";
-import { DiaryDispatchContext } from "../App";
 import Editor from "../component/Editor";
 
 const Edit = () => {
@@ -16,21 +14,12 @@ const Edit = () => {
     navigate(-1);
   };
 
-  const { onUpdate, onDelete } = useContext(DiaryDispatchContext);
-
   const onClickDelete = () => {
-    if (window.confirm("일기를 정말 삭제할까요? 다시 복구되지 않아요!")) {
-      onDelete(id);
-      navigate("/", { replace: true });
-    }
+    alert("Part B-3 에서 구현");
   };
 
-  const onSubmit = (data) => {
-    if (window.confirm("일기를 정말 수정할까요?")) {
-      const { date, content, emotionId } = data;
-      onUpdate(id, date, content, emotionId);
-      navigate("/", { replace: true });
-    }
+  const onSubmit = () => {
+    alert("Part B-2 에서 구현");
   };
 
   if (!data) {
